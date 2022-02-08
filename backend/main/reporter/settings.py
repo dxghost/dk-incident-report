@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_yasg",
-    'django_seed',  
+    "django_seed",
     "corsheaders",
     "reports",
 ]
@@ -136,5 +136,6 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CORS_ALLOWED_ORIGINS = ["http://"+i for i in ALLOWED_HOSTS]
-
+CORS_ALLOWED_ORIGINS = [
+    "http://" + i for i in os.getenv("DJANGO_ALLOWED_ORIGINS").split(" ")
+]
