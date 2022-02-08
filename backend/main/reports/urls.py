@@ -3,4 +3,4 @@ from reports.views import IncidentReportViewset
 
 
 router = routers.SimpleRouter()
-router.register("", IncidentReportViewset)
+router.register("", IncidentReportViewset,'incidentreport')
