@@ -1,11 +1,7 @@
-from django.shortcuts import render
 from rest_framework.viewsets import GenericViewSet
 from rest_framework import mixins
-from rest_framework.response import Response
-from rest_framework.decorators import action
 from rest_framework.pagination import LimitOffsetPagination
-from drf_yasg.utils import swagger_auto_schema
-from drf_yasg import openapi
+from monitoring.settings import DEFAULT_PAGINATION_LIMIT
 
 from logs.models import Log
 from logs.serializers import LogSerializer
@@ -13,7 +9,7 @@ from logs.serializers import LogSerializer
 
 class CustomOffsetPagination(LimitOffsetPagination):
     offset_query_param = "start"
-    default_limit = 15
+    default_limit = DEFAULT_PAGINATION_LIMIT
 
 
 class LogsViewset(mixins.ListModelMixin, GenericViewSet):
