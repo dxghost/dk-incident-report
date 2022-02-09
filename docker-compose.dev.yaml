@@ -3,23 +3,38 @@ version: '3.8'
 services:
   reporter:
     build: ./backend/main/
-    command: 
-      sh -c " ./migrate_and_seed.sh &&
-              python manage.py runserver 0.0.0.0:8000"
+    command: sh -c " ./migrate_and_seed.sh && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - ./backend/main/:/usr/src/app/
     ports:
       - 8000:8000
     env_file:
-      - ./.env.dev
+      - ./backend/main/.env.dev
     depends_on:
-      - db
-  db:
+      - reporter_db
+  reporter_db:
     image: postgres:13.0-alpine
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - reporter_postgres_data:/var/lib/postgresql/data/
     env_file:
-      - ./.env.dev
+      - ./backend/main/.env.dev
+  monitor:
+    build: ./backend/monitoring/
+    command: sh -c " ./migrate_and_seed.sh && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend/monitoring/:/usr/src/app/
+    ports:
+      - 8001:8000
+    env_file:
+      - ./backend/monitoring/.env.dev
+    depends_on:
+      - monitoring_db
+  monitoring_db:
+    image: postgres:13.0-alpine
+    volumes:
+      - monitoring_postgres_data:/var/lib/postgresql/data/
+    env_file:
+      - ./backend/monitoring/.env.dev
   matrix:
     build: ./frontend/matrix-logs/
     ports:
@@ -28,4 +43,5 @@ services:
       - reporter
 
 volumes:
-  postgres_data:
+  reporter_postgres_data:
+  monitoring_postgres_data:
