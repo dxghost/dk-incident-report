@@ -18,11 +18,11 @@ from django.urls import path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
-from reports.urls import router as reports_router
+from logs.urls import router as logs_router
 
 schema_view = get_schema_view(
     openapi.Info(
-        title="Reporter API",
+        title="Monitoring API",
         default_version="v1",
     ),
     public=True,
@@ -31,6 +31,6 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', schema_view.with_ui('swagger', cache_timeout=0), name='reporter-swagger-ui'),
-    path("reports/", include(reports_router.urls)),
+    path('', schema_view.with_ui('swagger', cache_timeout=0), name='monitoring-swagger-ui'),
+    path("logs/", include(logs_router.urls)),
 ]

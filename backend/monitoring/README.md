@@ -1,6 +1,6 @@
-# Reporter
+# Monitoring
 
-Core backend server which stores logs and serves them to frontend
+Mock monitoring server with pre-populated logs.
 
 ## Usage
 
@@ -11,13 +11,12 @@ These environment variables are required as they are listed below.
 | Name                      | Value                           |
 | ------------------------- | ------------------------------- |
 | DB_HOST                   | e.g.: `localhost`               |
-| POSTGRES_DB               | e.g.: `reporter`                |
+| POSTGRES_DB               | e.g.: `monitoring`              |
 | POSTGRES_PASSWORD         | e.g.: `somepassword`            |
-| POSTGRES_USER             | e.g.: `reporteruser`            |
+| POSTGRES_USER             | e.g.: `monitoringuser`          |
 | DEBUG                     | `0` or `1`                      |
 | DJANGO_SECRET_KEY         | some long safe secret           |
 | DJANGO_ALLOWED_HOSTS      | django server deployed hostname |
-| DJANGO_ALLOWED_ORIGINS    | clients origin                  |
 | DJANGO_SUPERUSER_USERNAME | username                        |
 | DJANGO_SUPERUSER_PASSWORD | password                        |
 | DJANGO_SUPERUSER_EMAIL    | email                           |

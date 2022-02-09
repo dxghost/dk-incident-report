@@ -6,12 +6,13 @@ A simple incident report system with a mock monitoring backend
 
 Suppose you already have installed docker, docker-compose and other common requirements, follow these steps.
 
-1. Create an environment file named `.env.dev` in project root directory and add values given in [Reporter service documnets](backend/main/README.md)
+1. Create environment files named `.env.dev` in both backend projects root directory and add values required. (check [Reporter service documents](backend/main/README.md) and [Monitoring service documents](backend/monitoring/README.md))
 
 2. Make sure there is no process occupying these ports
 
 - `80` as it is used by `frontend`
 - `8000` as it is used by `reporter` service
+- `8001` as it is used by `monitoring` service
 
 3. Build and run using compose file
 
