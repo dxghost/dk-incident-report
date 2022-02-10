@@ -7,3 +7,10 @@ class IncidentReport(models.Model):
 
     def __str__(self):
         return "({}, {})".format(self.pk, self.message)
+
+def store_multiple_reports(task):
+    datas = task.result
+    for dt in datas:
+        msg = dt["message"]
+        IncidentReport.objects.create(message=msg)
+    print(datas)
