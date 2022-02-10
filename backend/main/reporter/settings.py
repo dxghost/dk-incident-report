@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "drf_yasg",
+    "django_q",
     "django_seed",
     "corsheaders",
     "reports",
@@ -139,3 +140,22 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOWED_ORIGINS = [
     "http://" + i for i in os.getenv("DJANGO_ALLOWED_ORIGINS").split(" ")
 ]
+
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+REDIS_PORT = os.getenv("REDIS_PORT", "6379")
+REDIS_DB = os.getenv("REDIS_DB", "1")
+REDIS_FETCH_LOGS_COUNTER_KEY = "logs_offset"
+
+Q_CLUSTER = {
+    "name": "reporter",
+    "workers": 1,
+    "timeout": 60,
+    "redis": {
+        "host": REDIS_HOST,
+        "port": REDIS_PORT,
+        "db": REDIS_DB,
+    },
+}
+
+MONITOR_HOST = os.getenv("MONITOR_HOST", "localhost")
+MONITOR_PORT = os.getenv("MONITOR_PORT", "8001")

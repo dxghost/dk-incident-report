@@ -21,6 +21,8 @@ These environment variables are required as they are listed below.
 | DJANGO_SUPERUSER_USERNAME | username                        |
 | DJANGO_SUPERUSER_PASSWORD | password                        |
 | DJANGO_SUPERUSER_EMAIL    | email                           |
+| MONITOR_HOST              | monitor service host            |
+| MONITOR_PORT              | monitor django server port      |
 
 ### Requirements
 

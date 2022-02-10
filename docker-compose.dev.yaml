@@ -18,7 +18,20 @@ services:
       - reporter_postgres_data:/var/lib/postgresql/data/
     env_file:
       - ./backend/main/.env.dev
-  monitor:
+  reporter_redis:
+    image: redis:alpine
+  django-q:
+    build: ./backend/main/
+    command: python manage.py qcluster
+    env_file:
+      - ./backend/main/.env.dev
+    volumes:
+      - ./backend/main/:/usr/src/app/
+    depends_on:
+      - reporter_redis
+      - reporter_db
+      - monitoring
+  monitoring:
     build: ./backend/monitoring/
     command: sh -c " ./migrate_and_seed.sh && python manage.py runserver 0.0.0.0:8000"
     volumes:
