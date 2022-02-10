@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "django_q",
     "django_seed",
     "corsheaders",
+    "channels",
     "reports",
 ]
 
@@ -159,3 +160,12 @@ Q_CLUSTER = {
 
 MONITOR_HOST = os.getenv("MONITOR_HOST", "localhost")
 MONITOR_PORT = os.getenv("MONITOR_PORT", "8001")
+
+ASGI_APPLICATION = "reporter.asgi.application"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {"hosts": [(REDIS_HOST,   REDIS_PORT)]},
+    },
+}
